@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第一届T锦赛团体赛</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%);
+            color: #fff;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* 头部样式 */
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        .title {
+            font-family: 'Orbitron', monospace;
+            font-size: 3rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #feca57);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 3s ease infinite;
+            text-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+            margin-bottom: 10px;
+        }
+        
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            color: #b0b0b0;
+            margin-bottom: 30px;
+        }
+        
+        /* 队伍信息 */
+        .teams-container {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 40px;
+            gap: 30px;
+        }
+        
+        .team {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .team:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .team-a { border-left: 5px solid #ff6b6b; }
+        .team-b { border-left: 5px solid #4ecdc4; }
+        
+        .team-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .players {
+            list-style: none;
+        }
+        
+        .player {
+            padding: 12px 20px;
+            margin: 8px 0;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            border-left: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .player:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-left: 3px solid #fff;
+            transform: translateX(5px);
+        }
+        
+        /* 赛程样式 */
+        .schedule {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .schedule-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 30px;
+            color: #feca57;
+        }
+        
+        .matches {
+            display: grid;
+            gap: 20px;
+        }
+        
+        .match {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 15px;
+            padding: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+        
+        .match:hover {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: scale(1.02);
+        }
+        
+        .match-info {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex: 1;
+        }
+        
+        .match-number {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #4ecdc4;
+            min-width: 60px;
+        }
+        
+        .match-type {
+            background: linear-gradient(45deg, #ff6b6b, #feca57);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .match-desc {
+            font-size: 1.1rem;
+            color: #e0e0e0;
+        }
+        
+        /* 比分板 */
+        .scoreboard {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .score-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 30px;
+            color: #96ceb4;
+        }
+        
+        .score-display {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            font-size: 4rem;
+            font-family: 'Orbitron', monospace;
+            margin: 30px 0;
+        }
+        
+        .team-score {
+            text-align: center;
+        }
+        
+        .score {
+            font-size: 6rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .vs {
+            font-size: 2rem;
+            color: #b0b0b0;
+        }
+        
+
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .teams-container {
+                flex-direction: column;
+            }
+            
+            .title {
+                font-size: 2rem;
+            }
+            
+            .match-info {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            
+            .score-display {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .controls {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+        
+        /* 粒子背景 */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        /* 加载动画 */
+        .loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #0c0c0c;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+        
+        .spinner {
+            width: 80px;
+            height: 80px;
+            border: 8px solid rgba(255, 255, 255, 0.1);
+            border-left: 8px solid #ff6b6b;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="loading">
+        <div class="spinner"></div>
+    </div>
+    
+    <div class="particles" id="particles"></div>
+    
+    <div class="container">
+        <!-- 头部 -->
+        <div class="header">
+            <h1 class="title">第一届T锦赛团体赛</h1>
+            <p class="subtitle">每局三局两胜制</p>
+        </div>
+        
+        <!-- 队伍信息 -->
+        <div class="teams-container">
+            <div class="team team-a">
+                <h2 class="team-title">Team A</h2>
+                <ul class="players">
+                    <li class="player">王梓豪</li>
+                    <li class="player">谢佳奇</li>
+                    <li class="player">徐振轩</li>
+                    <li class="player">毛嘉盾</li>
+                </ul>
+            </div>
+            
+            <div class="team team-b">
+                <h2 class="team-title">Team B</h2>
+                <ul class="players">
+                    <li class="player">孙嘉辰</li>
+                    <li class="player">王烨伦</li>
+                    <li class="player">陈子涵</li>
+                    <li class="player">倪震坤</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- 赛程安排 -->
+        <div class="schedule">
+            <h2 class="schedule-title">比赛赛程</h2>
+            <div class="matches">
+                <div class="match" data-match="1">
+                    <div class="match-info">
+                        <div class="match-number">01</div>
+                        <div class="match-type">单打</div>
+                        <div class="match-desc">[]vs[]</div>
+                    </div>
+                </div>
+                
+                <div class="match" data-match="2">
+                    <div class="match-info">
+                        <div class="match-number">02</div>
+                        <div class="match-type">双打</div>
+                        <div class="match-desc">[]vs[]</div>
+                    </div>
+                </div>
+                
+                <div class="match" data-match="3">
+                    <div class="match-info">
+                        <div class="match-number">03</div>
+                        <div class="match-type">单打</div>
+                        <div class="match-desc">[]vs[]</div>
+                    </div>
+                </div>
+                
+                <div class="match" data-match="4">
+                    <div class="match-info">
+                        <div class="match-number">04</div>
+                        <div class="match-type">双打</div>
+                        <div class="match-desc">[]vs[]</div>
+                    </div>
+                </div>
+                
+                <div class="match" data-match="5">
+                    <div class="match-info">
+                        <div class="match-number">05</div>
+                        <div class="match-type">单打</div>
+                        <div class="match-desc">[]vs[]</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 比分板 -->
+        <div class="scoreboard">
+            <h2 class="score-title">实时比分</h2>
+            <div class="score-display">
+                <div class="team-score">
+                    <div>队伍A</div>
+                    <div class="score" id="scoreA">0</div>
+                </div>
+                <div class="vs">VS</div>
+                <div class="team-score">
+                    <div>队伍B</div>
+                    <div class="score" id="scoreB">0</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 页面加载动画
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                document.querySelector('.loading').style.opacity = '0';
+                setTimeout(() => {
+                    document.querySelector('.loading').style.display = 'none';
+                }, 500);
+            }, 1000);
+        });
+        
+        // 粒子背景效果
+        function createParticles() {
+            const particles = document.getElementById('particles');
+            const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#feca57'];
+            
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.style.position = 'absolute';
+                particle.style.width = Math.random() * 5 + 2 + 'px';
+                particle.style.height = particle.style.width;
+                particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+                particle.style.borderRadius = '50%';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.opacity = Math.random() * 0.5 + 0.1;
+                particle.style.animation = `float ${Math.random() * 10 + 5}s linear infinite`;
+                
+                particles.appendChild(particle);
+            }
+            
+            // 添加浮动动画
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes float {
+                    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+                    25% { transform: translate(10px, 10px) rotate(90deg); }
+                    50% { transform: translate(5px, 15px) rotate(180deg); }
+                    75% { transform: translate(-5px, 5px) rotate(270deg); }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+        
+
+        
+        // 赛程交互
+        document.querySelectorAll('.match').forEach((match, index) => {
+            match.addEventListener('click', function() {
+                // 高亮当前比赛
+                document.querySelectorAll('.match').forEach(m => {
+                    m.style.background = 'rgba(255, 255, 255, 0.08)';
+                    m.style.borderColor = 'transparent';
+                });
+                
+                this.style.background = 'rgba(255, 255, 255, 0.15)';
+                this.style.borderColor = 'rgba(255, 255, 255, 0.3)';
+                
+                // 显示比赛详情
+                const matchTypes = ['单打', '双打', '单打', '双打', '单打'];
+                const matchDesc = [
+                    '第一场单打比赛 - 队伍A vs 队伍B',
+                    '第一场双打比赛 - 队伍A组合 vs 队伍B组合',
+                    '第二场单打比赛 - 队伍A vs 队伍B',
+                    '第二场双打比赛 - 队伍A组合 vs 队伍B组合',
+                    '第三场单打比赛 - 队伍A vs 队伍B'
+                ];
+                
+                alert(`第${index + 1}场比赛\n类型：${matchTypes[index]}\n${matchDesc[index]}`);
+            });
+        });
+        
+        // 初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            createParticles();
+            
+            // 添加入场动画
+            const elements = document.querySelectorAll('.header, .teams-container, .schedule, .scoreboard');
+            elements.forEach((element, index) => {
+                element.style.opacity = '0';
+                element.style.transform = 'translateY(30px)';
+                element.style.transition = `all 0.6s ease ${index * 0.2}s`;
+                
+                setTimeout(() => {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }, 100);
+            });
+        });
+    </script>
+</body>
+</html>
