@@ -142,6 +142,7 @@
             justify-content: space-between;
             transition: all 0.3s ease;
             border: 1px solid transparent;
+            position: relative;
         }
         
         .match:hover {
@@ -175,9 +176,181 @@
             letter-spacing: 1px;
         }
         
-        .match-desc {
+        .match-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            flex: 1;
+            width: 100%;
+        }
+        
+        .match-teams {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex: 1;
+            justify-content: center;
+        }
+        
+        .team-vs {
+            display: flex;
+            align-items: center;
+            gap: 10px;
             font-size: 1.1rem;
-            color: #e0e0e0;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .team-a-player {
+            color: #ffa500;
+            font-weight: 600;
+            text-align: center;
+            min-width: 100px;
+            padding: 8px 12px;
+            background: rgba(255, 165, 0, 0.1);
+            border-radius: 8px;
+            border: 1px solid rgba(255, 165, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .team-b-player {
+            color: #4ecdc4;
+            font-weight: 600;
+            min-width: 100px;
+            padding: 8px 12px;
+            background: rgba(78, 205, 196, 0.1);
+            border-radius: 8px;
+            border: 1px solid rgba(78, 205, 196, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .vs-divider {
+            color: #b0b0b0;
+            font-weight: 700;
+            font-size: 0.9rem;
+            padding: 0 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 8px 12px;
+        }
+        
+        .match-result {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 8px;
+            min-width: 200px;
+            justify-content: center;
+        }
+        
+        .winner-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .winner-label {
+            color: #96ceb4;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        
+        .winner-name {
+            background: linear-gradient(45deg, #feca57, #ff9ff3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+            font-size: 1rem;
+            padding: 5px 12px;
+            border-radius: 15px;
+            border: 1px solid rgba(254, 202, 87, 0.3);
+        }
+        
+        .match-extra-info {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 4px;
+        }
+        
+        .inline-score {
+            color: #feca57;
+            font-family: 'Orbitron', monospace;
+            font-size: 0.8rem;
+            font-weight: 600;
+            background: rgba(254, 202, 87, 0.1);
+            padding: 3px 8px;
+            border-radius: 6px;
+            border: 1px solid rgba(254, 202, 87, 0.2);
+        }
+        
+        .inline-note {
+            color: #96ceb4;
+            font-size: 0.75rem;
+            font-style: italic;
+            opacity: 0.9;
+        }
+        
+        .pending-match {
+            color: #b0b0b0;
+            font-style: italic;
+            font-size: 0.9rem;
+        }
+        
+        .match-score {
+            color: #feca57;
+            font-family: 'Orbitron', monospace;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-top: 5px;
+            text-align: center;
+        }
+        
+        .fun-note {
+            color: #96ceb4;
+            font-size: 0.8rem;
+            font-style: italic;
+            margin-top: 8px;
+            text-align: center;
+            opacity: 0.8;
+        }
+        
+        .match-details {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .score-highlight {
+            background: rgba(254, 202, 87, 0.1);
+            border: 1px solid rgba(254, 202, 87, 0.3);
+            border-radius: 10px;
+            padding: 10px 15px;
+            font-family: 'Orbitron', monospace;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #feca57;
+            text-align: center;
+            margin: 0 5px;
+        }
+        
+        .note-container {
+            background: rgba(150, 206, 180, 0.1);
+            border: 1px solid rgba(150, 206, 180, 0.3);
+            border-radius: 8px;
+            padding: 8px 12px;
+            text-align: center;
+            max-width: 300px;
         }
         
         /* 比分板 */
@@ -236,10 +409,95 @@
                 font-size: 2rem;
             }
             
+            .match {
+                padding: 20px;
+            }
+            
             .match-info {
                 flex-direction: column;
                 align-items: flex-start;
-                gap: 10px;
+                gap: 15px;
+            }
+            
+            .match-content {
+                flex-direction: column;
+                gap: 15px;
+                width: 100%;
+            }
+            
+            .match-teams {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .team-vs {
+                flex-direction: column;
+                gap: 8px;
+                text-align: center;
+            }
+            
+            .team-a-player, .team-b-player {
+                min-width: auto;
+                text-align: center;
+                padding: 6px 10px;
+                width: 100%;
+                max-width: 150px;
+            }
+            
+            .vs-divider {
+                padding: 5px 0;
+                font-size: 0.8rem;
+            }
+            
+            .match-result {
+                min-width: auto;
+                justify-content: center;
+                width: 100%;
+                align-items: center;
+                text-align: center;
+            }
+            
+            .winner-info {
+                justify-content: center;
+            }
+            
+            .match-extra-info {
+                align-items: center;
+            }
+            
+            .inline-score {
+                font-size: 0.75rem;
+                padding: 3px 6px;
+            }
+            
+            .inline-note {
+                font-size: 0.7rem;
+            }
+            
+            .match-score {
+                font-size: 0.8rem;
+                margin-top: 8px;
+            }
+            
+            .fun-note {
+                font-size: 0.75rem;
+                margin-top: 6px;
+            }
+            
+            .match-details {
+                margin-top: 10px;
+                padding-top: 10px;
+                gap: 6px;
+            }
+            
+            .score-highlight {
+                font-size: 0.8rem;
+                padding: 8px 12px;
+            }
+            
+            .note-container {
+                max-width: 250px;
+                padding: 6px 10px;
             }
             
             .score-display {
@@ -360,7 +618,19 @@
                     <div class="match-info">
                         <div class="match-number">01</div>
                         <div class="match-type">单打</div>
-                        <div class="match-desc">[谢佳奇]vs[陈子涵]  Winner:谢佳奇</div>
+                        <div class="match-content">
+                            <div class="match-teams">
+                                <div class="team-vs">
+                                    <div class="team-a-player">谢佳奇</div>
+                                    <div class="vs-divider">VS</div>
+                                    <div class="team-b-player">陈子涵</div>
+                                </div>
+                            </div>
+                            <div class="match-result">
+                                <span class="winner-label">Winner:</span>
+                                <span class="winner-name">谢佳奇</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 
@@ -368,7 +638,19 @@
                     <div class="match-info">
                         <div class="match-number">02</div>
                         <div class="match-type">双打</div>
-                        <div class="match-desc">[王梓豪 徐振轩]vs[孙嘉辰 倪震坤] Winner:孙嘉辰 倪震坤</div>
+                        <div class="match-content">
+                            <div class="match-teams">
+                                <div class="team-vs">
+                                    <div class="team-a-player">王梓豪 徐振轩</div>
+                                    <div class="vs-divider">VS</div>
+                                    <div class="team-b-player">孙嘉辰 倪震坤</div>
+                                </div>
+                            </div>
+                            <div class="match-result">
+                                <span class="winner-label">Winner:</span>
+                                <span class="winner-name">孙嘉辰 倪震坤</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 
@@ -376,7 +658,25 @@
                     <div class="match-info">
                         <div class="match-number">03</div>
                         <div class="match-type">单打</div>
-                        <div class="match-desc">[毛嘉盾]vs[王烨伦] Winner:毛嘉盾</div>
+                        <div class="match-content">
+                            <div class="match-teams">
+                                <div class="team-vs">
+                                    <div class="team-a-player">毛嘉盾</div>
+                                    <div class="vs-divider">VS</div>
+                                    <div class="team-b-player">王烨伦</div>
+                                </div>
+                            </div>
+                            <div class="match-result">
+                                <div class="winner-info">
+                                    <span class="winner-label">Winner:</span>
+                                    <span class="winner-name">毛嘉盾</span>
+                                </div>
+                                <div class="match-extra-info">
+                                    <div class="inline-score">7-11 11-8 11-8 9-11 11-5</div>
+                                    <div class="inline-note">ps：王烨伦虽败犹荣</div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 
@@ -384,7 +684,18 @@
                     <div class="match-info">
                         <div class="match-number">04</div>
                         <div class="match-type">双打</div>
-                        <div class="match-desc">[谢佳奇 毛嘉盾]vs[王烨伦 陈子涵]</div>
+                        <div class="match-content">
+                            <div class="match-teams">
+                                <div class="team-vs">
+                                    <div class="team-a-player">谢佳奇 毛嘉盾</div>
+                                    <div class="vs-divider">VS</div>
+                                    <div class="team-b-player">王烨伦 陈子涵</div>
+                                </div>
+                            </div>
+                            <div class="match-result">
+                                <span class="pending-match">未开始</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 
@@ -392,7 +703,18 @@
                     <div class="match-info">
                         <div class="match-number">05</div>
                         <div class="match-type">单打</div>
-                        <div class="match-desc">[徐振轩]vs[孙嘉辰]</div>
+                        <div class="match-content">
+                            <div class="match-teams">
+                                <div class="team-vs">
+                                    <div class="team-a-player">徐振轩</div>
+                                    <div class="vs-divider">VS</div>
+                                    <div class="team-b-player">孙嘉辰</div>
+                                </div>
+                            </div>
+                            <div class="match-result">
+                                <span class="pending-match">未开始</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -491,5 +813,6 @@
     </script>
 </body>
 </html>
+
 
 
